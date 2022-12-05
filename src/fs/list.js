@@ -1,5 +1,15 @@
+import {opendir} from 'node:fs/promises';
+
 const list = async () => {
-    // Write your code here 
+    try {
+        const dir = await opendir('./src/fs/files');
+        for await (const file of dir) {
+            console.log(file.name);
+        }
+
+    } catch (err) {
+        if (err) throw Error('FS operation failed');
+    }
 };
 
 await list();
